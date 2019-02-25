@@ -10,6 +10,7 @@
 // Instructions for use:
 //   - Make sure you have at least one normal math block on your page
 //   - Use inline code starting with "math:". For example: `math: f(x) = x^2`
+//      - changed to more LaTeX-like `$f(x) = x^2` NOTE: no ending $.
 //   - Press F2 to rerender all inline math. You can of course change the shortcut in the code below.
 //   - The inline math will revert to inline code when the block becomes active.
 
@@ -23,15 +24,13 @@ function rerender_all() {
     var code = document.querySelectorAll("span[style*=\"monospace\"]")
     code.forEach(function(el) {
         var s = el.textContent
-        
-        //if (s.startsWith("$") && s.endsWith("$")) {
+        if (s.startsWith("$")) {
             el.style.color = null
             el.style.background = null
-            //s = s.slice(1).trim()
-            s = s.trim()
+            s = s.slice(1).trim()
             console.log("rendering ", s)
             katex.render(s, el, {throwOnError: false, font: 'mathit'})
-        //}
+        }
     })
 }
 
